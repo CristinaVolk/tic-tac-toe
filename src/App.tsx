@@ -1,9 +1,3 @@
-// Your challenge is to make a game of tic tac toe using React
-
-// You are given a component for a square [Square()] a component for the board [Board()] and a function to calculate the winner [calculateWinner()]
-// You must add the logic to mark the board with an X or O, show whose turn it is, find and display the winner, and start a new game
-
-// Individual square containing buttons that a player can click to complete their move
 import {useContext, useEffect, useState} from "react";
 import {BoardRow} from "./shared/BoardRow/BoardRow";
 import {AppContext, IPlayer} from "./context/AppContext";
