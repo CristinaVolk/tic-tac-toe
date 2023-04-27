@@ -1,7 +1,20 @@
 body {
     font: 20px "Century Gothic", Futura, sans-serif;
     margin: 20px;
+    background: rgb(18 40 67 / 70%);
 }
+
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+.board-row.disabled {
+    pointer-events: none;
+}
+
 .board-row:after {
     clear: both;
     content: "";
@@ -18,6 +31,7 @@ body {
     padding: 0;
     text-align: center;
     width: 80px;
+    color: #fff;
 }
 button:hover {
     cursor: pointer;

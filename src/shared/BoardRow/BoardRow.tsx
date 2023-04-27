@@ -6,9 +6,14 @@ export interface Cell {
 	column: number;
 }
 
-export const BoardRow = (props: any) => {
-	const { row } = props;
-	const cells = [];
+export interface BoardRowProps {
+	row: number;
+	disabled: boolean;
+}
+
+export const BoardRow = (props: BoardRowProps) => {
+	const { row, disabled } = props;
+	const cells: Cell[] = [];
 
 	for (let i = 0; i < 3; i++) {
 		let cell = {
@@ -20,7 +25,7 @@ export const BoardRow = (props: any) => {
 	}
 
 	return(
-		<div className="board-row">
+		<div className={`board-row ${disabled && 'disabled'}`}>
 			{
 				cells.map((cell, index) => (
 					<Square

@@ -6,29 +6,46 @@
 // Individual square containing buttons that a player can click to complete their move
 import {useContext, useEffect, useState} from "react";
 import {BoardRow} from "./shared/BoardRow/BoardRow";
-import {AppContext} from "./context/AppContext";
+import {AppContext, IPlayer} from "./context/AppContext";
 import {calculateWinner} from "./utils/calculateWinner";
 import './index.css';
 
-// Contains the 3x3 grid of squares
-// You may use a div with the class name "board-row" to create the row in the full board
 function App () {
     const [clicksCounter, setClicksCounter] = useState(0);
     const { playerX, playerO } = useContext(AppContext);
-    const [currPlayer, setCurrPlayer] = useState({...playerX});
+    const [currPlayer, setCurrPlayer] = useState<IPlayer | null>(null);
     const [gameOver, setGameOver] = useState(false);
     const [gameEnd, setGameEnd] = useState(false);
+    const [newBoard, setNewBoard] = useState<number[]>([]);
+
+    const handleResetGame = () => {
+        setClicksCounter(0);
+        setCurrPlayer(null);
+        setGameEnd(false);
+        setGameOver(false);
+        playerX.cells = [];
+        playerO.cells = [];
+        setNewBoard(prev => [0,1,2]);
+    }
+
+    useEffect(() => {
+        setNewBoard([0,1,2]);
+    }, []);
 
     useEffect(() => {
         if (clicksCounter >= 5) {
-            const result = calculateWinner(currPlayer.cells);
-            if (result) {
-                setGameOver?.(true);
-            } else if (clicksCounter === 9) {
-                setGameEnd?.(true);
+            if (currPlayer !== null) {
+                const result = calculateWinner(currPlayer.cells);
+                if (result) {
+                    setGameOver?.(true);
+                }
+                if (clicksCounter === 9 && !result) {
+                    setGameOver?.(true);
+                    setGameEnd?.(true);
+                    setCurrPlayer?.(null);
+                }
             }
         }
-
     }, [clicksCounter])
 
     return (
@@ -39,22 +56,14 @@ function App () {
             playerX,
             currPlayer,
             setCurrPlayer,
+            gameOver,
         }}>
-            {
-                gameOver ?
-                    <h6>{currPlayer.name} has just won!</h6>
-                : (
-                    <>
-                        <BoardRow row={0} />
-                        <BoardRow row={1} />
-                        <BoardRow row={2} />
-                        {clicksCounter}
-                        {JSON.stringify(playerX)}
-                        {JSON.stringify(playerO)}
-                        {gameEnd && <h6>No one has won!</h6>}
-                    </>
-                )
-            }
+            <>
+                {newBoard.map(row => <BoardRow key={row} row={row} disabled={gameOver} />)}
+                {gameOver && currPlayer && <h3>{currPlayer?.name} has just won!</h3>}
+                {gameEnd && <h3>No one has won!</h3>}
+                {(gameOver || gameEnd) && <button className="restart" onClick={handleResetGame}>Reset the Game</button>}
+            </>
         </AppContext.Provider>
     );
 }

@@ -9,16 +9,17 @@ export interface IAppContextProps {
 	setClicksCounter?: (clicksCounter: (prev: number) => number) => void;
 	playerX: IPlayer,
 	playerO: IPlayer,
-	winner?: {},
-	currPlayer: IPlayer;
-	setCurrPlayer?: (currPlayer: IPlayer) => void;
+	gameOver: boolean,
+	currPlayer: IPlayer | null;
+	setCurrPlayer?: (currPlayer: IPlayer | null) => void;
 }
 
 export const AppContext = createContext<IAppContextProps>({
 	playerX: {name: 'X', cells: []},
 	playerO: {name: 'O', cells: []},
 	clicksCounter: 0,
-	currPlayer: {name: 'X', cells: []},
+	currPlayer: null,
+	gameOver: false,
 });
 
 

@@ -1,4 +1,4 @@
-import React, {ButtonHTMLAttributes, memo, ReactNode, useContext, useState} from 'react';
+import React, {ButtonHTMLAttributes, memo, useContext, useEffect, useState} from 'react';
 import {Cell} from "../BoardRow/BoardRow";
 import {AppContext} from "../../context/AppContext";
 
@@ -16,6 +16,7 @@ export const Square = memo((props: SquareProps) => {
 		playerX,
 		playerO,
 		setCurrPlayer,
+		gameOver,
 	} = useContext(AppContext);
 
 	const assignValue = () => {
@@ -39,6 +40,13 @@ export const Square = memo((props: SquareProps) => {
 			assignValue();
 		}
 	};
+
+	useEffect(() => {
+		if (!gameOver) {
+			setBtnValue('');
+			setClicked(false);
+		}
+	}, [gameOver]);
 
 	return (
 		<button
