@@ -19,12 +19,12 @@ function App () {
         setGameOver(false);
         playerX.cells = [];
         playerO.cells = [];
-        setNewBoard(prev => [0,1,2]);
     }
 
     useEffect(() => {
-        setNewBoard([0,1,2]);
-    }, []);
+        console.log(playerX, playerO, currPlayer);
+        setNewBoard([0, 1, 2]);
+    }, [gameOver]);
 
     useEffect(() => {
         if (clicksCounter >= 5) {

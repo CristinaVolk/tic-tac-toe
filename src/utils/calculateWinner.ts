@@ -1,4 +1,6 @@
 export const calculateWinner = (cells : number[]) => {
+	if (cells.length === 0) return false;
+
 	let gameOver = false;
 
 	const winningPatterns = [
@@ -20,7 +22,7 @@ export const calculateWinner = (cells : number[]) => {
 		if (pattern.every(num => cells.includes(num))) {
 			gameOver = true;
 			break;
-		};
+		}
 	}
 
 	return gameOver;
