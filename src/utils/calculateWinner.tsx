@@ -1,18 +1,5 @@
-// List of the winning patterns where the squares are numbered from left to right and top to bottom as shown below
-//  0  1  2
-//  3  4  5
-//  6  7  8
-import {ButtonHTMLAttributes, useContext, useState} from "react";
-import {Cell} from "../BoardRow/BoardRow";
-import {AppContext, IPlayer} from "../../context/AppContext";
-
-function sort(arr: number[]){
-	return arr.sort((a,b) => a - b);
-}
-
-export const CalculateWinner = (cells : number[]) => {
+export const calculateWinner = (cells : number[]) => {
 	let gameOver = false;
-	console.log('CalculateWinner');
 
 	const winningPatterns = [
 		// Horizontal winning patterns
@@ -30,8 +17,7 @@ export const CalculateWinner = (cells : number[]) => {
 
 	for (let i = 0; i < winningPatterns.length; i++) {
 		const pattern = winningPatterns[i];
-		console.log(sort(pattern).toString());
-		if (sort(cells).toString() === sort(pattern).toString()) {
+		if (pattern.every(num => cells.includes(num))) {
 			gameOver = true;
 			break;
 		};
