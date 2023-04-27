@@ -13,3 +13,8 @@ List of the winning patterns where the squares are numbered from left to right a
 3  4  5
 6  7  8
 
+# In order to install the dependencies please run :
+```
+npm install --legacy-peer-deps
+```
+
