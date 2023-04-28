@@ -9,9 +9,13 @@ Contains the 3x3 grid of squares
 You may use a div with the class name "board-row" to create the row in the full board
 
 List of the winning patterns where the squares are numbered from left to right and top to bottom as shown below
-0  1  2
-3  4  5
-6  7  8
+```
+[
+  0  1  2
+  3  4  5
+  6  7  8
+]
+```
 
 # In order to install the dependencies please run :
 ```
