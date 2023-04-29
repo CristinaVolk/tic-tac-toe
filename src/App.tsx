@@ -22,7 +22,6 @@ function App () {
     }
 
     useEffect(() => {
-        console.log(playerX, playerO, currPlayer);
         setNewBoard([0, 1, 2]);
     }, [gameOver]);
 
@@ -52,12 +51,12 @@ function App () {
             setCurrPlayer,
             gameOver,
         }}>
-            <>
+            <div data-testid="board">
                 {newBoard.map(row => <BoardRow key={row} row={row} disabled={gameOver} />)}
                 {gameOver && currPlayer && <h3>{currPlayer?.name} has just won!</h3>}
                 {gameEnd && <h3>No one has won!</h3>}
                 {(gameOver || gameEnd) && <button className="restart" onClick={handleResetGame}>Reset the Game</button>}
-            </>
+            </div>
         </AppContext.Provider>
     );
 }

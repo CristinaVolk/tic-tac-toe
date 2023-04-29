@@ -25,7 +25,10 @@ export const BoardRow = (props: BoardRowProps) => {
 	}
 
 	return(
-		<div className={`board-row ${disabled && 'disabled'}`}>
+		<div
+			className={`board-row ${disabled && 'disabled'}`}
+			data-testid={'BoardRow'}
+		>
 			{
 				cells.map((cell, index) => (
 					<Square
